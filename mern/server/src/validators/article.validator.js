@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 // POST /api/articles/new
-export const newArticle = {
+const newArticle = {
   body: Joi.object().keys({
     title: Joi.string().required(),
     url: Joi.string().required(),
@@ -13,3 +13,7 @@ export const newArticle = {
 // GET /api/articles/search?keyword=keyword
 
 // GET /api/articles/:id
+
+export default {
+  newArticle,
+};

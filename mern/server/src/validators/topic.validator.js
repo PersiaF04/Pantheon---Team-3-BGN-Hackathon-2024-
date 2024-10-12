@@ -11,3 +11,7 @@ const newTopic = {
 // GET /api/topics/search?keyword=keyword
 
 // GET /api/topics/:topicId
+
+export default {
+  newTopic,
+};

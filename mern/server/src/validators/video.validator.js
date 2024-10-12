@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 // POST /api/videos/new
-const newVideo = {
+export const newVideo = {
   body: Joi.object().keys({
     title: Joi.string().required(),
     description: Joi.string().required(),
@@ -13,3 +13,7 @@ const newVideo = {
 // GET /api/videos/search?keyword=keyword
 
 // GET /api/videos/:videoId
+
+export default {
+  newVideo,
+};
