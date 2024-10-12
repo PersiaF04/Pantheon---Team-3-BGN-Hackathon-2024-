@@ -12,8 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "mongodb": "^6.9.0"
+    "mongodb": "^6.9.0",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"
