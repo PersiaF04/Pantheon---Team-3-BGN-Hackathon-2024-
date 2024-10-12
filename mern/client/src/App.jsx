@@ -10,22 +10,40 @@ import Profile from './components/Profile';
 const App = () => {
     const location = useLocation(); // Get the current path
 
+    // Determine if we are on specific pages
+    const isProfilePage = location.pathname === "/profile";
+    const isLinguisticsPage = location.pathname === "/linguistics";
+    const isFAQPage = location.pathname === "/faqs"; // Make sure FAQ path is correct
+    const isHelpPage = location.pathname === "/help";
+
+    // Determine if we are on any of these special pages
+    const isSpecialPage = isProfilePage || isLinguisticsPage || isFAQPage || isHelpPage;
+
     return (
         <div className="flex flex-col min-h-screen">
-            <div className="flex justify-center mt-4">
-                <Profile />
-                <SearchBar />
-            </div>
-            <div className="mt-4">
-                <Banner />
-            </div>
-            <Section title="Overview" />
+            {/* Render Profile and SearchBar only when not on special pages */}
+            {!isSpecialPage && (
+                <div className="flex justify-center mt-4">
+                    <Profile />
+                    <SearchBar />
+                </div>
+            )}
+            {/* Render Banner only when not on special pages */}
+            {!isSpecialPage && (
+                <div className="mt-4">
+                    <Banner />
+                </div>
+            )}
+            {/* Render Section only when not on special pages */}
+            {!isSpecialPage && <Section title="Overview" />}
             <div className="flex-grow">
-                {/* Only show Widgets if not on Profile Page */}
-                {location.pathname !== "/profile" && <Widgets />}
-                <Outlet /> {/* This will render ProfilePage or other routes */}
+                {/* Render Widgets only when not on special pages */}
+                {!isSpecialPage && <Widgets />}
+                {/* This will render ProfilePage, LinguisticsPage, FAQPage, or HelpPage based on the route */}
+                <Outlet /> 
             </div>
-            <Footer />
+            {/* Render Footer only when not on special pages */}
+            {!isSpecialPage && <Footer />}
         </div>
     );
 };

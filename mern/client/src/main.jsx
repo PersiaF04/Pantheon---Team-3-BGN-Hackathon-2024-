@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         path: "/", // Default route
       },
       {
-        path: "home", // Add this line for the home route
+        path: "home", 
       },
       {
         path: "profile", // Profile route
