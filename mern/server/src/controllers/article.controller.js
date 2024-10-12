@@ -19,9 +19,9 @@ class ArticleController {
 
   searchArticles = async (req, res) => {
     try {
-      const { search } = req.query;
+      const { keyword } = req.query;
       const articles = await Article.find({
-        title: { $regex: search, $options: "i" },
+        title: { $regex: keyword, $options: "i" },
       });
       return res.status(200).json({ success: true, articles });
     } catch (error) {

@@ -14,17 +14,23 @@ class TopicController {
   };
 
   searchTopics = async (req, res) => {
-    const { search } = req.query;
+    const { keyword } = req.query;
     const topics = await Topic.find({
-      name: { $regex: search, $options: "i" },
+      name: { $regex: keyword, $options: "i" },
     });
     return res.status(200).json({ success: true, topics });
   };
 
-  getTopicComments = async (req, res) => {
+  getTopic = async (req, res) => {
     const { topicId } = req.params;
+    const topic = await Topic.findById(topicId);
+    if (!topic) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Topic not found" });
+    }
     const comments = await Comment.find({ topicId }).populate("userId");
-    return res.status(200).json({ success: true, comments });
+    return res.status(200).json({ success: true, topic, comments });
   };
 }
 

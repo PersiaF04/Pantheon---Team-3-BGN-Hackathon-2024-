@@ -6,15 +6,12 @@ import Comment from "../models/comment.model";
 
 class UserController {
   googleSignOn = async (req, res) => {
-    const { accessToken } = req.body;
+    const { accessToken } = req.query;
+    let googleUser;
 
-    try {
-      const googleUser = await axios.get(
-        `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${accessToken}`,
-      );
-    } catch (error) {
-      return res.json({ message: "Invalid token" }, 400);
-    }
+    googleUser = await axios.get(
+      `https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${accessToken}`,
+    );
     let user = await User.findOne({ email: googleUser.data.email });
 
     if (!user) {
