@@ -9,16 +9,16 @@ const SearchBar = ({ onSearch }) => {
     };
 
     return (
-        <div>
+        <div className="flex justify-center mb-4">
             <input
                 type="text"
                 placeholder="Search..."
                 value={query}
                 onChange={handleChange}
-                className="w-full p-2 mb-4 border border-gray-300 rounded"
+                className="w-full max-w-3xl p-2 border border-gray-300 rounded" // Adjust max-w class as needed
             />
         </div>
     );
 };
 
-export default SearchBar;  // Ensure this line is present for default export
+export default SearchBar;

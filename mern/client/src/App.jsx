@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import SearchBar from './components/searchbar'; // Ensure this matches the filename
+import Banner from './components/banner'; 
+import SearchBar from './components/searchbar'; 
+import Footer from './components/Footer'; 
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -10,12 +12,15 @@ const App = () => {
   };
 
   return (
-    <div className="w-full p-6">
-      <h1 className="text-center">BGN Hackathon 2024</h1>
-      <SearchBar onSearch={handleSearch} />
-      <div>
+    <div className="flex flex-col min-h-screen">
+      <Banner /> {/* Add the Banner at the top */}
+      <div className="flex justify-center"> {/* Center the SearchBar below the Banner */}
+        <SearchBar onSearch={handleSearch} />
+      </div>
+      <div className="flex-grow text-center mt-4">
         <p>Your search term: {searchTerm}</p>
       </div>
+      <Footer /> 
     </div>
   );
 };
