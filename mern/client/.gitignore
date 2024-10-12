@@ -17,6 +17,7 @@ yarn-error.log
 .env.development.local
 .env.test.local
 .env.production.local
+config.env  # Added line to ignore config.env
 
 # Logs
 logs
