@@ -9,13 +9,13 @@ const SearchBar = ({ onSearch }) => {
     };
 
     return (
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center mb-4 w-full">
             <input
                 type="text"
                 placeholder="Search..."
                 value={query}
                 onChange={handleChange}
-                className="w-full max-w-3xl p-2 border border-gray-300 rounded" // Adjust max-w class as needed
+                className="w-full max-w-4xl p-2 border border-gray-300 rounded bg-white text-black" // Added background and text color
             />
         </div>
     );

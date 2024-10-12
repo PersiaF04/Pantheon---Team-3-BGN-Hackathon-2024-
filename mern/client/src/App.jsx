@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Banner from './components/banner';
-import SearchBar from './components/searchbar';
+import Banner from './components/banner'; // Ensure the path matches your project structure
 import Footer from './components/Footer';
 import Widgets from './components/Widget'; // Import the Widgets component
 
@@ -14,14 +13,11 @@ const App = () => {
 
     return (
         <div className="flex flex-col min-h-screen">
-            <Banner />
-            <div className="flex justify-center">
-                <SearchBar onSearch={handleSearch} />
-            </div>
+            <Banner onSearch={handleSearch} /> {/* Pass the search handler */}
             <div className="flex-grow text-center mt-4">
                 <p>Your search term: {searchTerm}</p>
             </div>
-            <Widgets /> {/* Add the Widgets component here */}
+            <Widgets />
             <Footer />
         </div>
     );
