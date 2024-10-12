@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import Widgets from './components/Widget';
 import Section from './components/Section';
 import Profile from './components/Profile';
-
+import Carousel from './components/Carousel';
 const App = () => {
     const location = useLocation(); // Get the current path
 
@@ -21,21 +21,20 @@ const App = () => {
 
     return (
         <div className="flex flex-col min-h-screen">
-            {/* Render Profile and SearchBar only when not on special pages */}
+            {!isSpecialPage && (
+                    <Banner />
+            )}
+
             {!isSpecialPage && (
                 <div className="flex justify-center mt-4">
-                    <Profile />
-                    <SearchBar />
+                 <SearchBar />
                 </div>
             )}
             {/* Render Banner only when not on special pages */}
-            {!isSpecialPage && (
-                <div className="mt-4">
-                    <Banner />
-                </div>
-            )}
+            
+            {!isSpecialPage && location.pathname === "/" || location.pathname === "/home" && <Carousel />}
             {/* Render Section only when not on special pages */}
-            {!isSpecialPage && <Section title="Overview" />}
+            {!isSpecialPage && <Section title="Celebrating the richness of black culture" />}
             <div className="flex-grow">
                 {/* Render Widgets only when not on special pages */}
                 {!isSpecialPage && <Widgets />}

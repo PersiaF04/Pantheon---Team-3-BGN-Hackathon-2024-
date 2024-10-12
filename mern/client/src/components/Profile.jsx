@@ -2,7 +2,7 @@ import React from 'react';
 
 const Profile = () => {
     return (
-        <div className="absolute top-4 left-4 flex items-center">
+        <div className="flex items-center">
             {/* Smaller Profile Image */}
             <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-300">
                 <img
@@ -12,7 +12,7 @@ const Profile = () => {
                 />
             </div>
             {/* Profile Name next to the Icon */}
-            <h2 className="text-sm font-semibold ml-2">John Doe</h2>
+            <h2 className="text-sm font-semibold ml-2 text-white">John Doe</h2>
         </div>
     );
 };
