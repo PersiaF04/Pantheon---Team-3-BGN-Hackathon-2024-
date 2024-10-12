@@ -3,6 +3,7 @@ import cors from "cors";
 import logger from "morgan";
 
 import * as config from "./config/env.js";
+import "./config/db.js";
 
 const app = express();
 
