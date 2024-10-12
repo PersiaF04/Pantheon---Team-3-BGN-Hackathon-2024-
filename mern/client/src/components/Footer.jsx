@@ -2,9 +2,9 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div className="bg-gray-800 text-white py-4 text-center">
+        <footer className="bg-gray-800 text-white py-4 text-center w-full mt-auto"> {/* Added mt-auto */}
             <p>&copy; 2024 BGN Hackathon. All rights reserved.</p>
-        </div>
+        </footer>
     );
 };
 
