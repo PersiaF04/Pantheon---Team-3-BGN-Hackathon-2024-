@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Change this line
 
 const Widget = ({ title, content, onClick }) => {
     return (
@@ -12,13 +13,15 @@ const Widget = ({ title, content, onClick }) => {
     );
 };
 
-const Widgets = ({ onWidgetClick }) => {
+const Widgets = () => {
+    const navigate = useNavigate(); // Update this line
+
     const widgetData = [
-        { title: "Home", content: "Welcome to the Home Page!" },
-        { title: "Profile", content: "Here is your Profile!" },
-        { title: "Linguistics", content: "Learn about Linguistics!" },
-        { title: "FAQs", content: "Frequently Asked Questions." },
-        { title: "Help", content: "Need help? Click here!" },
+        { title: "Home", content: "Welcome to the Home Page!", path: "/home" },
+        { title: "Profile", content: "Here is your Profile!", path: "/profile" },
+        { title: "Linguistics", content: "Learn about Linguistics!", path: "/linguistics" },
+        { title: "FAQs", content: "Frequently Asked Questions.", path: "/faqs" },
+        { title: "Help", content: "Need help? Click here!", path: "/help" },
     ];
 
     return (
@@ -28,7 +31,7 @@ const Widgets = ({ onWidgetClick }) => {
                     key={index} 
                     title={widget.title} 
                     content={widget.content} 
-                    onClick={() => onWidgetClick(widget.content)} // Handle click
+                    onClick={() => navigate(widget.path)} // Change this line
                 />
             ))}
         </div>

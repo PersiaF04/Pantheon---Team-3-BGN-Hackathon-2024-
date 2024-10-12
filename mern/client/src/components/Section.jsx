@@ -7,7 +7,7 @@ const Section = ({ title }) => {
         <div className="p-4">
             <h2 className="text-2xl font-bold mb-4">{title}</h2>
             {/* Outer container for the mini sections */}
-            <div className="bg-gray-100 p-4 rounded-lg shadow-md"> {/* Add background, padding, and rounded corners */}
+            <div className="bg-gray-300 p-4 rounded-lg shadow-md"> {/* Change the background to a darker gray */}
                 <div className="flex flex-col items-center">
                     <MiniSection 
                         title="History" 
