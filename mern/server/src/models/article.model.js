@@ -6,7 +6,7 @@ const articleSchema = new Schema(
       type: String,
       required: true,
     },
-    link: {
+    url: {
       type: String,
       required: true,
     },
@@ -14,7 +14,7 @@ const articleSchema = new Schema(
       type: String,
       required: true,
     },
-    image: {
+    thumbnail: {
       type: String,
       required: true,
     },

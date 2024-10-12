@@ -6,9 +6,12 @@ const videoSchema = new Schema(
       type: String,
       required: true,
     },
-    link: {
+    url: {
       type: String,
       required: true,
+    },
+    thumbnail: {
+      type: String,
     },
     description: {
       type: String,

@@ -4,7 +4,6 @@ import User from "../models/user.model";
 import Topic from "../models/topic.model";
 import Comment from "../models/comment.model";
 
-// User mostly managed by google OAuth
 class UserController {
   googleSignOn = async (req, res) => {
     const { accessToken } = req.body;
@@ -40,21 +39,25 @@ class UserController {
   };
 
   commentOnTopic = async (req, res) => {
-    const { topicId, comment } = req.body;
-    const user = req.user;
-    const topic = await Topic.findById(topicId);
-    if (!topic) {
-      return res.json({ message: "Topic not found" }, 404);
+    try {
+      const { topicId, comment } = req.body;
+      const user = req.user;
+      const topic = await Topic.findById(topicId);
+      if (!topic) {
+        return res.json({ message: "Topic not found" }, 404);
+      }
+
+      const newComment = new Comment({
+        userId: user._id,
+        topicId: topic._id,
+        content: comment,
+      });
+
+      await newComment.save();
+      res.json({ success: true, comment: newComment });
+    } catch (error) {
+      return res.json({ success: false, error: error.message });
     }
-
-    const newComment = new Comment({
-      userId: user._id,
-      topicId: topic._id,
-      content: comment,
-    });
-
-    await newComment.save();
-    res.json({ success: true, comment: newComment });
   };
 }
 
