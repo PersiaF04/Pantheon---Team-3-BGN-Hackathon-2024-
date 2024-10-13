@@ -13,8 +13,8 @@ router.post(
   ArticleController.newArticle,
 );
 
-router.get("/:id", ArticleController.getArticle);
-
 router.get("/search", ArticleController.searchArticles);
+
+router.get("/:id", ArticleController.getArticle);
 
 export default router;
