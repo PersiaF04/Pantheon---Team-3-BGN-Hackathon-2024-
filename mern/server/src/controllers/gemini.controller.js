@@ -24,7 +24,8 @@ class GeminiController {
 
       return res.status(200).json({
         success: true,
-        reply: result,
+        // reply: result.response.candidates[0].content.parts[0].text,
+        reply: result.response.text(),
       });
     } catch (error) {
       return res.status(500).json({
