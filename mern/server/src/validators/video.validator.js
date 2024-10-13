@@ -5,7 +5,7 @@ export const newVideo = Joi.object().keys({
   title: Joi.string().required(),
   description: Joi.string().required(),
   url: Joi.string().required(),
-  topicId: Joi.string().required(),
+  thumbnail: Joi.string().required(),
 });
 
 // GET /v1/videos/search?keyword=keyword
