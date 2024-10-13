@@ -1,12 +1,12 @@
 import axios from "axios";
 
-import User from "../models/user.model";
-import Topic from "../models/topic.model";
-import Comment from "../models/comment.model";
+import User from "../models/user.model.js";
+import Topic from "../models/topic.model.js";
+import Comment from "../models/comment.model.js";
 
 class UserController {
   googleSignOn = async (req, res) => {
-    const { accessToken } = req.query;
+    const { accessToken } = req.body;
     let googleUser;
 
     googleUser = await axios.get(

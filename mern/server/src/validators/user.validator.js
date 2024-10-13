@@ -1,8 +1,8 @@
 import Joi from "joi";
 
-// POST /api/users?accessToken=accessToken
+// POST /v1/users
 
-// POST /api/users/comment
+// POST /v1/users/comment
 const newComment = {
   body: Joi.object().keys({
     videoId: Joi.string().required(),

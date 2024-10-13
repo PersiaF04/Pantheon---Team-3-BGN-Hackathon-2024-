@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-// POST /api/articles/new
+// POST /v1/articles/new
 const newArticle = {
   body: Joi.object().keys({
     title: Joi.string().required(),
@@ -10,9 +10,9 @@ const newArticle = {
   }),
 };
 
-// GET /api/articles/search?keyword=keyword
+// GET /v1/articles/search?keyword=keyword
 
-// GET /api/articles/:id
+// GET /v1/articles/:id
 
 export default {
   newArticle,

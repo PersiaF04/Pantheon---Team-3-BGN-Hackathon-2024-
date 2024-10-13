@@ -1,19 +1,20 @@
 import express from "express";
 
-import auth from "../middleware/auth.js";
-import validate from "../middleware/validate.js";
-import UserValidation from "../validations/user.validation.js";
+import authenticate from "../middlewares/auth.js";
+import validate from "../middlewares/validator.js";
 
+import UserValidation from "../validators/user.validator.js";
 import UserController from "../controllers/user.controller.js";
 
 const router = express.Router();
 
-router.get("/", UserController.googleSignOn);
+router.post("/", UserController.googleSignOn);
 
 router.post(
   /comment/,
   validate(UserValidation.newComment),
-  UserController.newComment,
+  authenticate,
+  UserController.commentOnTopic,
 );
 
 export default router;

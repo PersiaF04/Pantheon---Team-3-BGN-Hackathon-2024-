@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 import jwt from "jsonwebtoken";
 
-import { JWT_SECRET } from "../config";
+import { JWT_SECRET } from "../utils/env.js";
 
 // User schema with google auth
 const userSchema = new Schema(
@@ -29,7 +29,7 @@ const userSchema = new Schema(
   { timestamps: true },
 );
 
-userSchema.methods.generateAuthToken = function () {
+userSchema.methods.generateAuthToken = function() {
   return jwt.sign(
     {
       _id: this._id,

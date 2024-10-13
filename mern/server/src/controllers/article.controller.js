@@ -1,7 +1,7 @@
-import Article from "../models/article.model";
+import Article from "../models/article.model.js";
 
 class ArticleController {
-  createArticle = async (req, res) => {
+  newArticle = async (req, res) => {
     try {
       const { title, url, description, thumbnail } = req.body;
       const article = new Article({

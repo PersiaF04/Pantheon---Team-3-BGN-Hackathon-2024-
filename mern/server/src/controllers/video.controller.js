@@ -1,4 +1,4 @@
-import Video from "../models/video.model";
+import Video from "../models/video.model.js";
 
 class VideoController {
   searchVideos = async (req, res) => {

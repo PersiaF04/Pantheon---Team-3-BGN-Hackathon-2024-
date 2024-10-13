@@ -1,5 +1,5 @@
-import Topic from "../models/topic.model";
-import Comment from "../models/comment.model";
+import Topic from "../models/topic.model.js";
+import Comment from "../models/comment.model.js";
 
 class TopicController {
   createTopic = async (req, res) => {
