@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react'; // Import useState
 import { useLocation } from 'react-router-dom';
 import Footer from './Footer';
 import Banner from './banner';
 import Widgets from './Widget';
-import SearchBar from './searchbar'; // Import SearchBar to use in the results page
+import SearchBar from './searchbar';
 import SearchWidgets from './SearchWidgets';
+import DynamicContent from './DynamicContent'; // Import the DynamicContent component
+
 const SearchResults = () => {
     const location = useLocation();
     const query = new URLSearchParams(location.search).get('q'); // Get the search query
+    const [selectedWidget, setSelectedWidget] = useState("Videos"); // Default widget
 
     return (
         <div className="flex flex-col min-h-screen">
             <Banner />
             <div className="flex-grow p-4">
-            <SearchBar initialQuery={query} /> {/* Pass the query as a prop */}
-            <SearchWidgets /> 
+                <SearchBar initialQuery={query} /> {/* Pass the query as a prop */}
+                <SearchWidgets setSelectedWidget={setSelectedWidget} /> {/* Pass down state setter */}
                 <h1 className="text-2xl font-bold">Search Results for: {query}</h1>
 
-                {/* Render the SearchBar with the current query */}
+                {/* Render dynamic content based on the selected widget */}
+                <DynamicContent selectedWidget={selectedWidget} />
 
                 {/* Placeholder for search results */}
                 <div className="mt-4">

@@ -14,7 +14,7 @@ const SearchWidget = ({ title, content, onClick }) => {
     );
 };
 
-const SearchWidgets = () => {
+const SearchWidgets = ({ setSelectedWidget }) => {
     const navigate = useNavigate();
 
     const widgetData = [
@@ -31,7 +31,9 @@ const SearchWidgets = () => {
                     key={index} 
                     title={widget.title} 
                     content={widget.content} 
-                    onClick={() => navigate(widget.path)} 
+                    onClick={() => {
+                        setSelectedWidget(widget.title); // Set selected widget
+                    }} 
                 />
             ))}
         </div>
