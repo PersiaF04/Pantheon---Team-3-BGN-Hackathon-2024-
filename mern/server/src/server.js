@@ -22,10 +22,10 @@ app.get("/", (req, res) => {
 });
 
 // Mount routers
-app.use("/v1/user", userRouter);
-app.use("/v1/topic", topicRouter);
-app.use("/v1/article", articleRouter);
-app.use("/v1/video", videoRouter);
+app.use("/v1/users", userRouter);
+app.use("/v1/topics", topicRouter);
+app.use("/v1/articles", articleRouter);
+app.use("/v1/videos", videoRouter);
 
 app.listen(config.PORT, () => {
   console.log(`Server listening on port ${config.PORT}`);
