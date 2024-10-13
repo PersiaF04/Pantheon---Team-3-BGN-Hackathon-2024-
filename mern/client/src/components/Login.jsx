@@ -1,17 +1,30 @@
 import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
+import { useUser } from './UserContext';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
+    const { setUser } = useUser();
 
     const responseGoogle = (response) => {
-        if (response.error) {
-            console.error("Login failed:", response.error);
-        } else {
-            console.log(response);
-            // Handle successful response here
+        console.log("Google Response:", response); // Debug response
+        if (response.credential) {
+            const token = response.credential; // Get the token
+
+            // Decode the ID token (if using it) to get user info
+            const userPayload = JSON.parse(atob(token.split('.')[1]));
+
+            setUser({
+                name: userPayload.name || "Unknown",
+                email: userPayload.email || "No email",
+                picture: userPayload.picture || "https://via.placeholder.com/150", // Assuming `picture` is in userPayload
+            });
+
+            // Navigate to profile after setting the user
             navigate('/profile');
+        } else {
+            console.error("Login failed:", response.error);
         }
     };
 
@@ -21,7 +34,8 @@ const Login = () => {
                 <h2 className="text-2xl font-bold mb-4">Login</h2>
                 <GoogleLogin
                     onSuccess={responseGoogle}
-                    onError={responseGoogle}
+                    onError={(error) => console.error("Login failed:", error)}
+                    scope="openid profile email" // Updated scopes
                     style={{ width: '100%' }}
                     className="bg-red-500 text-white font-semibold py-2 px-4 rounded w-full"
                 />
