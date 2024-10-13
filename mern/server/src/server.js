@@ -16,6 +16,11 @@ app.use(cors());
 app.use(express.json());
 app.use(logger("tiny"));
 
+// home route
+app.get("/", (req, res) => {
+  res.json({ message: "Nuar API is live" });
+});
+
 // Mount routers
 app.use("/v1/user", userRouter);
 app.use("/v1/topic", topicRouter);

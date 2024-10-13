@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const topicSchema = new Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
     },

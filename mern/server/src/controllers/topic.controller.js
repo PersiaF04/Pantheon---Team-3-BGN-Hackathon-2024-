@@ -3,10 +3,11 @@ import Comment from "../models/comment.model.js";
 
 class TopicController {
   createTopic = async (req, res) => {
-    const { name, description } = req.body;
+    const { name, description, thumbnail } = req.body;
     const topic = new Topic({
       name,
       description,
+      thumbnail,
     });
 
     await topic.save();
