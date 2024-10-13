@@ -4,6 +4,7 @@ import axios from "axios";
 import Banner from "./banner";
 import Footer from "./Footer";
 import Widgets from "./Widget";
+
 const VideoDetail = () => {
   const { id } = useParams(); // Get the video ID from the URL
   const [video, setVideo] = useState(null);
@@ -32,7 +33,7 @@ const VideoDetail = () => {
       <Banner />
 
       <div className="flex-grow p-4">
-        <h1 className="text-2xl font-bold mb-4">{video?.title}</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center">{video?.title}</h1>
 
         <div className="my-4 w-full max-w-4xl mx-auto aspect-video">
           <iframe
@@ -46,7 +47,7 @@ const VideoDetail = () => {
           ></iframe>
         </div>
 
-        <p className="text-gray-700 mt-4">{video?.description}</p>
+        <p className="text-gray-700 mt-4 text-center">{video?.description}</p>
       </div>
       <Widgets />
       <Footer />
