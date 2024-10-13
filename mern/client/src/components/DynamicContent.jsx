@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const DynamicContent = ({ selectedWidget, keyword }) => {
   const [videos, setVideos] = useState([]);
@@ -9,6 +10,7 @@ const DynamicContent = ({ selectedWidget, keyword }) => {
   const [discussions, setDiscussions] = useState([]);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [loadingGemini, setLoadingGemini] = useState(false);
 
   // Fetch videos when the component mounts or when the keyword changes
   useEffect(() => {
@@ -47,6 +49,7 @@ const DynamicContent = ({ selectedWidget, keyword }) => {
     };
 
     const fetchGemini = async () => {
+      setLoadingGemini(true);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/gemini/search?keyword=${keyword}`,
@@ -58,6 +61,7 @@ const DynamicContent = ({ selectedWidget, keyword }) => {
             text: response.data.reply,
           },
         ]);
+        setLoadingGemini(false);
       } catch (error) {
         console.error("Search Gemini failed:", error);
       }
@@ -159,21 +163,24 @@ const DynamicContent = ({ selectedWidget, keyword }) => {
           <div className="bg-gray-200 p-4 rounded-lg shadow-md">
             <h3 className="text-xl font-bold mb-2">Chat with Gemini</h3>
             <div className="h-[300px] overflow-y-auto p-2 border border-gray-300 rounded mb-4">
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={
-                    message.sender === "user" ? "text-right" : "text-left"
-                  }
-                >
-                  <p
-                    className={`inline-block p-2 m-1 rounded ${message.sender === "user" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+              {loadingGemini ? (
+                <BeatLoader color="#000" />
+              ) : (
+                messages.map((message, index) => (
+                  <div
+                    key={index}
+                    className={
+                      message.sender === "user" ? "text-right" : "text-left"
+                    }
                   >
-                    {/* {message.text} */}
-                    <ReactMarkdown>{message.text}</ReactMarkdown>
-                  </p>
-                </div>
-              ))}
+                    <p
+                      className={`inline-block p-2 m-1 rounded ${message.sender === "user" ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+                    >
+                      <ReactMarkdown>{message.text}</ReactMarkdown>
+                    </p>
+                  </div>
+                ))
+              )}
             </div>
             <form onSubmit={handleSendMessage} className="flex">
               <input
