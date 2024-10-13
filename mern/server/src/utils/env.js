@@ -11,3 +11,4 @@ export const PORT = process.env.PORT || 8080;
 export const MONGO_URI = process.env.MONGO_URI;
 export const MONGO_DB_NAME = process.env.MONGO_DB_NAME || "bgn";
 export const JWT_SECRET = process.env.JWT_SECRET;
+export const GEMINI_API_KEY = process.env.GEMINI_API_KEY;

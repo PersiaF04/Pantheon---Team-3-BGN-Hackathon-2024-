@@ -9,6 +9,7 @@ import userRouter from "./routes/user.route.js";
 import topicRouter from "./routes/topic.route.js";
 import articleRouter from "./routes/article.route.js";
 import videoRouter from "./routes/video.route.js";
+import geminiRouter from "./routes/gemini.route.js";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/v1/users", userRouter);
 app.use("/v1/topics", topicRouter);
 app.use("/v1/articles", articleRouter);
 app.use("/v1/videos", videoRouter);
+app.use("/v1/gemini", geminiRouter);
 
 app.listen(config.PORT, () => {
   console.log(`Server listening on port ${config.PORT}`);
