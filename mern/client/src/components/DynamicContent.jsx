@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import BeatLoader from "react-spinners/BeatLoader";
+import { Link } from "react-router-dom";
 
 const DynamicContent = ({ selectedWidget, keyword }) => {
   const [videos, setVideos] = useState([]);
@@ -72,6 +73,8 @@ const DynamicContent = ({ selectedWidget, keyword }) => {
       fetchArticles();
       fetchDiscussions();
       fetchGemini();
+      console.log(videos._id);
+
     }
   }, [keyword]);
 
@@ -96,67 +99,57 @@ const DynamicContent = ({ selectedWidget, keyword }) => {
 
   const renderContent = () => {
     switch (selectedWidget) {
-      case "Videos":
-        return (
-          <div className="bg-gray-200 p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-bold mb-2">Videos</h3>
-            <div className="flex flex-col">
-              {" "}
-              {/* Vertical stacking for videos */}
-              {videos.map((video, index) => (
-                <div
-                  key={index}
-                  className="flex m-2 bg-white rounded shadow-md p-4"
-                >
-                  {/* Thumbnail box */}
-                  <div className="bg-gray-300 rounded p-0 w-1/5 h-[150px]">
-                    <img
-                      src={video.thumbnail}
-                      alt={video.title}
-                      className="w-full h-full object-cover rounded"
-                    />
-                  </div>
-                  {/* Title and summary box */}
-                  <div className="ml-4 flex-1">
-                    <p className="font-semibold text-lg">{video.title}</p>
-                    <p className="text-gray-700">{video.description}</p>
-                  </div>
+        case "Videos":
+            return (
+              <div className="bg-gray-200 p-4 rounded-lg shadow-md">
+                <h3 className="text-xl font-bold mb-2">Videos</h3>
+                <div className="flex flex-col">
+                  {videos.map((video, index) => (
+                    <Link key={index} to={`/videos/${video._id}`}>
+                      <div className="flex m-2 bg-white rounded shadow-md p-4">
+                        <div className="bg-gray-300 rounded p-0 w-1/5 h-[150px]">
+                          <img
+                            src={video.thumbnail}
+                            alt={video.title}
+                            className="w-full h-full object-cover rounded"
+                          />
+                        </div>
+                        <div className="ml-4 flex-1">
+                          <p className="font-semibold text-lg">{video.title}</p>
+                          <p className="text-gray-700">{video.description}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        );
+              </div>
+            );
 
-      case "Articles":
-        return (
-          <div className="bg-gray-200 p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-bold mb-2">Articles</h3>
-            <div className="flex flex-col">
-              {" "}
-              {/* Vertical stacking for articles */}
-              {articles.map((article, index) => (
-                <div
-                  key={index}
-                  className="flex m-2 bg-white rounded shadow-md p-4"
-                >
-                  {/* Thumbnail box */}
-                  <div className="bg-gray-300 rounded p-0 w-1/5 h-[150px]">
-                    <img
-                      src={article.thumbnail}
-                      alt={article.title}
-                      className="w-full h-full object-cover rounded"
-                    />
+            case "Articles":
+                return (
+                  <div className="bg-gray-200 p-4 rounded-lg shadow-md">
+                    <h3 className="text-xl font-bold mb-2">Articles</h3>
+                    <div className="flex flex-col">
+                      {articles.map((article, index) => (
+                        <Link key={index} to={`/articles/${article._id}`}>
+                          <div className="flex m-2 bg-white rounded shadow-md p-4">
+                            <div className="bg-gray-300 rounded p-0 w-1/5 h-[150px]">
+                              <img
+                                src={article.thumbnail}
+                                alt={article.title}
+                                className="w-full h-full object-cover rounded"
+                              />
+                            </div>
+                            <div className="ml-4 flex-1">
+                              <p className="font-semibold text-lg">{article.title}</p>
+                              <p className="text-gray-700">{article.description}</p>
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                  {/* Title and summary box */}
-                  <div className="ml-4 flex-1">
-                    <p className="font-semibold text-lg">{article.title}</p>
-                    <p className="text-gray-700">{article.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
+                );
 
       case "Gemini":
         return (
@@ -200,36 +193,31 @@ const DynamicContent = ({ selectedWidget, keyword }) => {
           </div>
         );
 
-      case "Discussion":
-        return (
-          <div className="bg-gray-200 p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-bold mb-2">Discussion Topics</h3>
-            <div className="flex flex-col">
-              {" "}
-              {/* Vertical stacking for discussions */}
-              {discussions.map((discussion, index) => (
-                <div
-                  key={index}
-                  className="flex m-2 bg-white rounded shadow-md p-4"
-                >
-                  {/* Thumbnail box for discussion */}
-                  <div className="bg-gray-300 rounded p-0 w-1/5 h-[150px]">
-                    <img
-                      src={discussion.thumbnail}
-                      alt={discussion.name}
-                      className="w-full h-full object-cover rounded"
-                    />
-                  </div>
-                  {/* Title and summary box */}
-                  <div className="ml-4 flex-1">
-                    <p className="font-semibold text-lg">{discussion.name}</p>
-                    <p className="text-gray-700">{discussion.description}</p>
-                  </div>
+        case "Discussion":
+            return (
+              <div className="bg-gray-200 p-4 rounded-lg shadow-md">
+                <h3 className="text-xl font-bold mb-2">Discussion Topics</h3>
+                <div className="flex flex-col">
+                  {discussions.map((discussion, index) => (
+                    <Link key={index} to={`/discussion/${discussion._id}`}>
+                      <div className="flex m-2 bg-white rounded shadow-md p-4">
+                        <div className="bg-gray-300 rounded p-0 w-1/5 h-[150px]">
+                          <img
+                            src={discussion.thumbnail}
+                            alt={discussion.name}
+                            className="w-full h-full object-cover rounded"
+                          />
+                        </div>
+                        <div className="ml-4 flex-1">
+                          <p className="font-semibold text-lg">{discussion.name}</p>
+                          <p className="text-gray-700">{discussion.description}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        );
+              </div>
+            );
 
       default:
         return <p>Select a widget to see content.</p>;

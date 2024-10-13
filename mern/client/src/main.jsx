@@ -11,10 +11,13 @@ import Help from './components/HelpPage';
 import Login from './components/Login';
 import SearchResults from './components/SearchResults'; // Import the SearchResults component
 import "./index.css";
+import VideoDetail from './components/VideoDetail'; // Import the VideoDetail component
+import ArticleDetail from './components/ArticleDetail'; // Import ArticleDetail
+import DiscussionDetail from './components/DiscussionDetail'; // Import DiscussionDetail
 
 const router = createBrowserRouter([
   {
-    path: "/", 
+    path: "/",
     element: <App />,
     children: [
       { path: "home" },
@@ -22,8 +25,11 @@ const router = createBrowserRouter([
       { path: "linguistics", element: <Linguistics /> },
       { path: "faqs", element: <FAQs /> },
       { path: "help", element: <Help /> },
-      { path: "login", element: <Login /> }, // Add the login route
-      { path: "search", element: <SearchResults /> }, // Add the search results route
+      { path: "login", element: <Login /> },
+      { path: "search", element: <SearchResults /> },
+      { path: "videos/:id", element: <VideoDetail /> }, // Add dynamic video route
+      { path: "articles/:id", element: <ArticleDetail /> }, // Add dynamic article route
+      { path: "discussion/:id", element: <DiscussionDetail /> }, // Add dynamic discussion route
     ],
   },
 ]);
