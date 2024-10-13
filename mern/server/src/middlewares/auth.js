@@ -4,7 +4,10 @@ import User from "../models/user.model.js";
 import { JWT_SECRET } from "../utils/env.js";
 
 const auth = async (req, res, next) => {
-  const token = req.header("Authorization");
+  if (!req.header("Authorization")) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const token = req.header("Authorization").split(" ")[1];
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });
   }
@@ -12,7 +15,6 @@ const auth = async (req, res, next) => {
     const decoded = jwt.verify(token, JWT_SECRET);
     const user = await User.findOne({
       _id: decoded._id,
-      "tokens.token": token,
     });
     if (!user) {
       throw new Error();

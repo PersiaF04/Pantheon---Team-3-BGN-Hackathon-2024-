@@ -6,10 +6,6 @@ import { JWT_SECRET } from "../utils/env.js";
 // User schema with google auth
 const userSchema = new Schema(
   {
-    googleId: {
-      type: String,
-      required: true,
-    },
     email: {
       type: String,
       required: true,
@@ -32,9 +28,7 @@ const userSchema = new Schema(
 userSchema.methods.generateAuthToken = function() {
   return jwt.sign(
     {
-      _id: this._id,
-      googleId: this.googleId,
-      displayName: this.displayName,
+      _id: this._id.toString(),
       firstName: this.firstName,
       lastName: this.lastName,
       image: this.image,

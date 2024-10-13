@@ -8,10 +8,14 @@ import UserController from "../controllers/user.controller.js";
 
 const router = express.Router();
 
-router.post("/", UserController.googleSignOn);
+router.post(
+  "/signon",
+  validate(UserValidation.googleSignOn),
+  UserController.googleSignOn,
+);
 
 router.post(
-  /comment/,
+  "/comment",
   validate(UserValidation.newComment),
   authenticate,
   UserController.commentOnTopic,

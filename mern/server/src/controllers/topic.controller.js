@@ -30,7 +30,7 @@ class TopicController {
         .status(404)
         .json({ success: false, message: "Topic not found" });
     }
-    const comments = await Comment.find({ topicId }).populate("userId");
+    const comments = await Comment.find({ topic: topicId }).populate("user");
     return res.status(200).json({ success: true, topic, comments });
   };
 }

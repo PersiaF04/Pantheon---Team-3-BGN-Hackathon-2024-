@@ -2,11 +2,11 @@ import { Schema, model } from "mongoose";
 
 const commentSchema = new Schema(
   {
-    userId: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    topicId: {
+    topic: {
       type: Schema.Types.ObjectId,
       ref: "Topic",
     },
