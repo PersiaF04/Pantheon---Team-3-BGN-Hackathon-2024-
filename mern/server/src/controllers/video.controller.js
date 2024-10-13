@@ -3,9 +3,9 @@ import Video from "../models/video.model.js";
 class VideoController {
   searchVideos = async (req, res) => {
     try {
-      const { search } = req.query;
+      const { keyword } = req.query;
       const videos = await Video.find({
-        title: { $regex: search, $options: "i" },
+        title: { $regex: keyword, $options: "i" },
       });
       return res.status(200).json({ success: true, videos });
     } catch (error) {
