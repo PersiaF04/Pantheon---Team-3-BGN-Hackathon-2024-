@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(logger("tiny"));
 
-// home route
+// health check
 app.get("/", (req, res) => {
   res.json({ message: "Nuar API is live" });
 });
