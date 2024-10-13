@@ -1,6 +1,7 @@
 // SearchWidgets.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import VideoWidget from './VideoWidget'; // Import VideoWidget
 
 const SearchWidget = ({ title, content, onClick }) => {
     return (
@@ -14,7 +15,7 @@ const SearchWidget = ({ title, content, onClick }) => {
     );
 };
 
-const SearchWidgets = ({ setSelectedWidget }) => {
+const SearchWidgets = ({ selectedWidget, setSelectedWidget }) => {
     const navigate = useNavigate();
 
     const widgetData = [
@@ -24,18 +25,42 @@ const SearchWidgets = ({ setSelectedWidget }) => {
         { title: "Discussion", content: "Join the discussion forum!", path: "/discussion" },
     ];
 
+    const videoData = [
+        { thumbnail: "video_thumbnail_1.jpg", title: "Video Title 1" },
+        { thumbnail: "video_thumbnail_2.jpg", title: "Video Title 2" },
+    ];
+
     return (
-        <div className="flex flex-wrap justify-center mb-4">
-            {widgetData.map((widget, index) => (
-                <SearchWidget 
-                    key={index} 
-                    title={widget.title} 
-                    content={widget.content} 
-                    onClick={() => {
-                        setSelectedWidget(widget.title); // Set selected widget
-                    }} 
-                />
-            ))}
+        <div>
+            <div className="flex flex-wrap justify-center mb-4">
+                {widgetData.map((widget, index) => (
+                    <SearchWidget 
+                        key={index} 
+                        title={widget.title} 
+                        content={widget.content} 
+                        onClick={() => setSelectedWidget(widget.title)} 
+                    />
+                ))}
+            </div>
+
+            {/* Adjust this div to remove or modify the background if needed */}
+            <div className="p-4 rounded-lg">
+                {selectedWidget === "Videos" && (
+                    <div>
+                        <h2 className="text-2xl font-bold mb-4">Videos</h2>
+                        {videoData.map((video, index) => (
+                            <VideoWidget 
+                                key={index} 
+                                thumbnail={video.thumbnail} 
+                                title={video.title} 
+                            />
+                        ))}
+                    </div>
+                )}
+                {selectedWidget === "Articles" && <h2 className="text-2xl font-bold mb-4">Articles</h2>}
+                {selectedWidget === "Gemini" && <h2 className="text-2xl font-bold mb-4">Gemini</h2>}
+                {selectedWidget === "Discussion" && <h2 className="text-2xl font-bold mb-4">Discussion</h2>}
+            </div>
         </div>
     );
 };

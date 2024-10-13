@@ -1,3 +1,4 @@
+// SearchResults.jsx
 import React, { useState } from 'react'; // Import useState
 import { useLocation } from 'react-router-dom';
 import Footer from './Footer';
@@ -21,11 +22,11 @@ const SearchResults = () => {
                 <h1 className="text-2xl font-bold">Search Results for: {query}</h1>
 
                 {/* Render dynamic content based on the selected widget */}
-                <DynamicContent selectedWidget={selectedWidget} />
+               
 
                 {/* Placeholder for search results */}
                 <div className="mt-4">
-                    <p>No results found. (This is a placeholder; replace with actual results.)</p>
+                <DynamicContent selectedWidget={selectedWidget} />
                 </div>
             </div>
             
