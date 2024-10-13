@@ -14,6 +14,8 @@ const Login = () => {
 
             // Decode the ID token (if using it) to get user info
             const userPayload = JSON.parse(atob(token.split('.')[1]));
+            console.log("response credential", token);
+            console.log("userpayload", userPayload);
 
             setUser({
                 name: userPayload.name || "Unknown",
@@ -40,6 +42,7 @@ const Login = () => {
                     className="bg-red-500 text-white font-semibold py-2 px-4 rounded w-full"
                 />
             </div>
+            
         </div>
     );
 };

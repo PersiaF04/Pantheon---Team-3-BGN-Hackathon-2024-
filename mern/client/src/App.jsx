@@ -16,9 +16,10 @@ const App = () => {
     const isFAQPage = location.pathname === "/faqs"; // Make sure FAQ path is correct
     const isHelpPage = location.pathname === "/help";
     const loginpage = location.pathname === "/login";
+    const searchResult = location.pathname === "/search";
 
     // Determine if we are on any of these special pages
-    const isSpecialPage = isProfilePage || isLinguisticsPage || isFAQPage || isHelpPage || loginpage;
+    const isSpecialPage = isProfilePage || isLinguisticsPage || isFAQPage || isHelpPage || loginpage|| searchResult;
 
     return (
         <div className="flex flex-col min-h-screen">
