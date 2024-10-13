@@ -7,7 +7,7 @@ const SearchBar = ({ onSearch }) => {
         setQuery(e.target.value);
         onSearch(e.target.value);
     };
-
+    
     return (
         <div className="flex justify-center mb-4 w-full">
             <input

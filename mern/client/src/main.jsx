@@ -1,47 +1,35 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App"; // This is your main layout component
+import { GoogleOAuthProvider } from '@react-oauth/google'; // Import the provider
+import App from "./App"; 
 import ProfilePage from './components/ProfilePage';
 import Linguistics from './components/LinguisticPage';
 import FAQs from './components/FAQsPage';
 import Help from './components/HelpPage';
+import Login from './components/Login';
 import "./index.css";
 
 const router = createBrowserRouter([
   {
-    path: "/", // Root path renders App
+    path: "/", 
     element: <App />,
     children: [
-      {
-        path: "/", // Default route
-      },
-      {
-        path: "home", 
-      },
-      {
-        path: "profile", // Profile route
-        element: <ProfilePage />,
-      },
-      {
-        path: "linguistics", // Linguistics route
-        element: <Linguistics />,
-      },
-      {
-        path: "faqs", // FAQs route
-        element: <FAQs />,
-      },
-      {
-        path: "help", // Help route
-        element: <Help />,
-      },
+      { path: "/", element: <App /> }, // You might want to add the default element here
+      { path: "home", element: <App /> },
+      { path: "profile", element: <ProfilePage /> },
+      { path: "linguistics", element: <Linguistics /> },
+      { path: "faqs", element: <FAQs /> },
+      { path: "help", element: <Help /> },
+      { path: "login", element: <Login /> }, // Add the login route
     ],
   },
 ]);
 
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID}> {/* Provide the client ID */}
+      <RouterProvider router={router} />
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );
