@@ -1,14 +1,12 @@
 import Joi from "joi";
 
 // POST /v1/videos/new
-export const newVideo = {
-  body: Joi.object().keys({
-    title: Joi.string().required(),
-    description: Joi.string().required(),
-    url: Joi.string().required(),
-    topicId: Joi.string().required(),
-  }),
-};
+export const newVideo = Joi.object().keys({
+  title: Joi.string().required(),
+  description: Joi.string().required(),
+  url: Joi.string().required(),
+  topicId: Joi.string().required(),
+});
 
 // GET /v1/videos/search?keyword=keyword
 
