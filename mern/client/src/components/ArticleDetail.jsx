@@ -31,7 +31,7 @@ const ArticleDetail = () => {
     }
   }, [id]);
 
-  // Add a log statement for article state to check its value
+  // Log the article state for debugging
   useEffect(() => {
     console.log("Current article state:", article);
   }, [article]);
@@ -45,7 +45,10 @@ const ArticleDetail = () => {
       <div className="flex-grow p-4">
         <h1 className="text-2xl font-bold mb-4 text-center">{article.title}</h1>
         <img src={article.thumbnail} alt={article.title} className="w-full h-auto object-cover mb-4" />
-        <p className="text-gray-700 mt-4">{article.description}</p> {/* Use description instead of content */}
+        <p className="text-gray-700 mt-4">{article.description}</p>
+        <a href={article.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline mt-4 block">
+          Read more
+        </a> {/* Link to the article's URL */}
       </div>
       <Widgets />
       <Footer />
