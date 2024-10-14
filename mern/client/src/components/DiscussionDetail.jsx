@@ -52,7 +52,7 @@ const DiscussionDetail = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       // Update the comments state to include the new comment
@@ -63,6 +63,8 @@ const DiscussionDetail = () => {
         }));
         setReply(""); // Clear the reply input
       }
+
+      fetchDiscussion(); // Fetch the updated
     } catch (error) {
       console.error("Failed to submit comment:", error);
     }
@@ -86,21 +88,6 @@ const DiscussionDetail = () => {
 
         <div>
           <h2 className="text-lg font-semibold mb-4">Comments</h2>
-          <form onSubmit={handleNewComment} className="mt-6">
-          <textarea
-            value={reply}
-            onChange={(e) => setReply(e.target.value)}
-            placeholder="Add a reply..."
-            className="border border-gray-300 p-3 rounded-lg w-full h-24 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
-          <button
-            type="submit"
-            className="mt-3 bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition"
-          >
-            Reply
-          </button>
-        </form>
           {discussion.comments && discussion.comments.length > 0 ? (
             <div className="space-y-6">
               {discussion.comments.map((comment) => (
@@ -135,9 +122,24 @@ const DiscussionDetail = () => {
           ) : (
             <p className="text-gray-500">No comments yet.</p>
           )}
+          <form onSubmit={handleNewComment} className="mt-6">
+            <textarea
+              value={reply}
+              onChange={(e) => setReply(e.target.value)}
+              placeholder="Add a reply..."
+              className="border border-gray-300 p-3 rounded-lg w-full h-24 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+            <button
+              type="submit"
+              className="mt-3 bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition"
+            >
+              Reply
+            </button>
+          </form>
         </div>
       </div>
-        <Widgets/>
+      <Widgets />
       <Footer />
     </div>
   );
