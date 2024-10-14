@@ -1,11 +1,12 @@
 import React from 'react';
 import Profile from './Profile';
+import NuarLogo from '/NuarLogo.jpg'; // Adjust the path based on your project structure
 
 const Banner = () => {
     return (
         <div className="bg-black h-16 w-full flex items-center justify-between px-4">
             <Profile /> {/* Profile component on the right */}
-            <h1 className="text-white text-4xl font-bold flex-grow text-center">Nuar</h1>
+            <img src={NuarLogo} alt="Nuar Logo" className="h-12 mx-auto" /> 
         </div>
     );
 };
