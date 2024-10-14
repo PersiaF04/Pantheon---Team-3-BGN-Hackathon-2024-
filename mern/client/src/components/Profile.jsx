@@ -8,7 +8,10 @@ const Profile = () => {
       {/* Smaller Profile Image */}
       <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-300">
         <img
-          src={user?.image} // Use user picture or placeholder
+          src={
+            user?.image ||
+            "https://res.cloudinary.com/dka01ysp8/image/upload/v1728897227/hjzloqgdjkgcgij6hhlf.jpg"
+          } // Use user picture or placeholder
           alt="Profile"
           className="w-full h-full object-cover"
         />
