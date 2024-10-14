@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Footer from "./Footer";
+import Banner from "./banner";
+import Widgets from "./Widget";
 
 const DiscussionDetail = () => {
   const { id } = useParams(); // Get the discussion ID from the URL
@@ -68,60 +71,74 @@ const DiscussionDetail = () => {
   if (!discussion) return <div>Loading...</div>;
 
   return (
-    <div className="flex flex-col p-4">
-      <h1 className="text-2xl font-bold">{discussion.name}</h1>
-      <img
-        src={discussion.thumbnail}
-        alt={discussion.name}
-        className="w-full h-auto object-cover mb-4"
-      />
-      <p className="mb-4">{discussion.description}</p>
+    <div className="min-h-screen flex flex-col">
+      {/* Banner at the top */}
+      <Banner />
 
-      <div>
-        <h2 className="text-lg font-semibold">Comments</h2>
-        {discussion.comments && discussion.comments.length > 0 ? (
-          <ul className="list-disc pl-5">
-            {discussion.comments.map((comment) => (
-              <li key={comment._id} className="mb-4">
-                {/* User information */}
-                <div className="flex items-center mb-2">
+      <div className="flex-grow p-4">
+        <h1 className="text-2xl font-bold mb-4">{discussion.name}</h1>
+        <img
+          src={discussion.thumbnail}
+          alt={discussion.name}
+          className="w-full h-auto object-cover mb-4 rounded-lg"
+        />
+        <p className="mb-6 text-gray-700">{discussion.description}</p>
+
+        <div>
+          <h2 className="text-lg font-semibold mb-4">Comments</h2>
+          <form onSubmit={handleNewComment} className="mt-6">
+          <textarea
+            value={reply}
+            onChange={(e) => setReply(e.target.value)}
+            placeholder="Add a reply..."
+            className="border border-gray-300 p-3 rounded-lg w-full h-24 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+          <button
+            type="submit"
+            className="mt-3 bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition"
+          >
+            Reply
+          </button>
+        </form>
+          {discussion.comments && discussion.comments.length > 0 ? (
+            <div className="space-y-6">
+              {discussion.comments.map((comment) => (
+                <div
+                  key={comment._id}
+                  className="flex items-start space-x-4 p-4 border-b border-gray-200"
+                >
+                  {/* User Avatar */}
                   <img
                     src={comment.user?.image || "/default-avatar.png"}
                     alt={`${comment.user?.firstName}'s avatar`}
-                    className="w-10 h-10 rounded-full mr-2"
+                    className="w-12 h-12 rounded-full object-cover"
                   />
-                  <p>
-                    <strong>{comment.user ? `${comment.user.firstName} ${comment.user.lastName}` : "Anonymous"}</strong>
-                  </p>
-                </div>
-                {/* Comment content */}
-                <p>{comment.content}</p>
-                <span className="text-gray-500 text-sm ml-2">
-                  {new Date(comment.createdAt).toLocaleString()}
-                </span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No comments yet.</p>
-        )}
-      </div>
 
-      <form onSubmit={handleNewComment} className="mt-4">
-        <textarea
-          value={reply}
-          onChange={(e) => setReply(e.target.value)}
-          placeholder="Add a reply..."
-          className="border border-gray-300 p-2 w-full h-24"
-          required
-        />
-        <button
-          type="submit"
-          className="mt-2 bg-blue-500 text-white py-2 px-4 rounded"
-        >
-          Reply
-        </button>
-      </form>
+                  {/* Comment Content */}
+                  <div className="flex flex-col">
+                    <div className="flex items-center space-x-2">
+                      <span className="font-semibold">
+                        {comment.user
+                          ? `${comment.user.firstName} ${comment.user.lastName}`
+                          : "Anonymous"}
+                      </span>
+                      <span className="text-gray-500 text-sm">
+                        {new Date(comment.createdAt).toLocaleString()}
+                      </span>
+                    </div>
+                    <p className="text-gray-700 mt-1">{comment.content}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500">No comments yet.</p>
+          )}
+        </div>
+      </div>
+        <Widgets/>
+      <Footer />
     </div>
   );
 };
