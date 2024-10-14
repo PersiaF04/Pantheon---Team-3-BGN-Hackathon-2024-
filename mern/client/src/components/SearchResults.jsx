@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import Footer from "./Footer";
 import Banner from "./banner";
 import Widgets from "./Widget";
-import SearchBar from "./searchbar";
+import SearchBar from "./SearchBar";
 import SearchWidgets from "./SearchWidgets";
 import DynamicContent from "./DynamicContent"; // Import the DynamicContent component
 
