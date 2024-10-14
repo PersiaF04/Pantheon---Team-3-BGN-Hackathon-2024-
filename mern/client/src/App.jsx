@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, useLocation, useMatch } from "react-router-dom"; // Import useMatch
-import SearchBar from "./components/SearcBar";
+import SearchBar from "./components/SearchBar";
 import Banner from "./components/banner";
 import Footer from "./components/Footer";
 import Widgets from "./components/Widget";
