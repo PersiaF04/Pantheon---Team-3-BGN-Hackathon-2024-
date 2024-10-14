@@ -47,16 +47,25 @@ const ArticleDetail = () => {
     <div className="flex flex-col min-h-screen">
       <Banner />
       <div className="flex-grow p-4">
-        {/* <h1 className="text-2xl font-bold mb-4 text-center">{article.title}</h1> */}
-        {/* <img src={article.thumbnail} alt={article.title} className="w-full h-auto object-cover mb-4" /> */}
-        {/* <p className="text-gray-700 mt-4">{article.description}</p> */}
-        {/* <iframe */}
-        {/*   src={article.url} */}
-        {/*   title={article.title} */}
-        {/*   className="w-full h-[600px] border-0" */}
-        {/*   sandbox="allow-same-origin allow-scripts" */}
-        {/* ></iframe> */}
-        {JSON.stringify(article)}
+        <h1 className="text-2xl font-bold mb-4 text-center">{article.title}</h1>
+        <img
+          src={article.thumbnail}
+          alt={article.title}
+          className="w-full h-auto object-cover mb-4"
+        />
+        <p className="text-gray-700 mt-4">{article.description}</p>
+
+        {/* // read more button */}
+        <div className="text-center mt-4">
+          <a
+            href={article.url}
+            target="_blank"
+            rel="noreferrer"
+            className="text-blue-500 hover:underline"
+          >
+            Read More
+          </a>
+        </div>
         {/* <ReaderView */}
         {/*   url={article.url} */}
         {/*   css={` */}
