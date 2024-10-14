@@ -46,9 +46,14 @@ const ArticleDetail = () => {
         <h1 className="text-2xl font-bold mb-4 text-center">{article.title}</h1>
         <img src={article.thumbnail} alt={article.title} className="w-full h-auto object-cover mb-4" />
         <p className="text-gray-700 mt-4">{article.description}</p>
-        <a href={article.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline mt-4 block">
-          Read more
-        </a> {/* Link to the article's URL */}
+
+        {/* Iframe to load the content directly */}
+        <iframe
+          src={article.url}
+          title={article.title}
+          className="w-full h-[600px] border-0"
+          sandbox="allow-same-origin allow-scripts"
+        ></iframe>
       </div>
       <Widgets />
       <Footer />
