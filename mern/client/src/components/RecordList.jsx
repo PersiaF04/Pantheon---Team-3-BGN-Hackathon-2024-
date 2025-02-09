@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom"; // Assuming params is from react-router-dom
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Record = (props) => (
   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
@@ -9,7 +9,6 @@ const Record = (props) => (
     <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
       {props.record.position}
     </td>
-    
     <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
       {props.record.level}
     </td>
@@ -35,29 +34,14 @@ const Record = (props) => (
     </td>
   </tr>
 );
-// This method fetches the records from the database.
-useEffect(() => {
-  async function getRecords() {
-    const response = await fetch(`http://localhost:5050/record/`);
-    if (!response.ok) {
-      const message = `An error occurred: ${response.statusText}`;
-      console.error(message);
-      return;
-    }
-    const records = await response.json();
-    setRecords(records);
-  }
-  getRecords();
-  return;
-}, [records.length]);
 
 export default function RecordList() {
   const [records, setRecords] = useState([]);
-  const [form, setForm] = useState({ name: "", position: "", level: "" }); // Assuming the form state
-  const navigate = useNavigate(); // To navigate after form submission
-  const params = useParams(); // Get the params from URL if editing
+  const [form, setForm] = useState({ name: "", position: "", level: "" });
+  const navigate = useNavigate();
+  const params = useParams();
 
-  // This method fetches the records from the database.
+  // Fetch records from the database when the component mounts
   useEffect(() => {
     async function getRecords() {
       const response = await fetch(`http://localhost:5050/record/`);
@@ -70,8 +54,7 @@ export default function RecordList() {
       setRecords(records);
     }
     getRecords();
-    return;
-  }, [records.length]);
+  }, []); // Empty dependency array to run once on mount
 
   // This method will delete a record
   async function deleteRecord(id) {
@@ -82,7 +65,7 @@ export default function RecordList() {
     setRecords(newRecords);
   }
 
-  // This method will map out the records on the table
+  // Map through the records to create a list
   function recordList() {
     return records.map((record) => {
       return (
@@ -95,17 +78,15 @@ export default function RecordList() {
     });
   }
 
-  // This function will handle the submission.
+  // Handle form submission
   async function onSubmit(e) {
     e.preventDefault();
     const person = { ...form };
 
     try {
-      // if the id is present, we will set the URL to /record/:id, otherwise to /record.
       const response = await fetch(
         `http://localhost:5050/record${params.id ? "/" + params.id : ""}`,
         {
-          // if the id is present, use PATCH, otherwise POST.
           method: `${params.id ? "PATCH" : "POST"}`,
           headers: {
             "Content-Type": "application/json",
@@ -120,7 +101,6 @@ export default function RecordList() {
     } catch (error) {
       console.error("A problem occurred with your fetch operation: ", error);
     } finally {
-      // Reset form fields and navigate to the records list page
       setForm({ name: "", position: "", level: "" });
       navigate("/");
     }
